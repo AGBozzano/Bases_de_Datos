@@ -105,16 +105,17 @@ class EventsManager {
               $('.calendario').fullCalendar('renderEvent', {
                 title: $('#titulo').val(),
                 start: $('#start_date').val(),
-                allDay: 1
+                allDay: true
               })
             }else {
               $('.calendario').fullCalendar('renderEvent', {
                 title: $('#titulo').val(),
                 start: $('#start_date').val()+" "+$('#start_hour').val(),
-                allDay: 0,
+                allDay: false,
                 end: $('#end_date').val()+" "+$('#end_hour').val()
               })
             }
+            $('form').reset();
           }else {
             alert(data.msg)
           }
@@ -123,6 +124,8 @@ class EventsManager {
           alert("error en la comunicación con el servidor EN EVENTOSdd",e);
         }
       })
+
+     
 
     }
 
