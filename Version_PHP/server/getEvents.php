@@ -1,9 +1,9 @@
 <?php
 
   	session_start();
-
 	require('conector.php');
 
+if($_SESSION['isLogin']){
 	$con = new ConectorBD('localhost', 'root', '');
 
 	$response['conexion'] = $con -> initConexion('calendario_db');
@@ -30,14 +30,12 @@
 			}
 			$response['eventos'] = $eventos;
 			$response['msg'] = 'OK';	
-			$response['hola'] = 'por que no anda';
-		}
-		
-	}else{
+		}	
+	}else
 		$response['msg'] = 'Problemas con la conexión a la base de datos';
-	}
+} else
+	$response['msg'] = 'Debe iniciar sesión';	
 
-	
 	echo json_encode($response);
 	$con -> cerrarConexion();
  ?>

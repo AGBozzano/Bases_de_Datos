@@ -105,26 +105,22 @@ class EventsManager {
               $('.calendario').fullCalendar('renderEvent', {
                 title: $('#titulo').val(),
                 start: $('#start_date').val(),
-                allDay: true
+                allDay: 1
               })
             }else {
               $('.calendario').fullCalendar('renderEvent', {
                 title: $('#titulo').val(),
                 start: $('#start_date').val()+" "+$('#start_hour').val(),
-                allDay: false,
+                allDay: 0,
                 end: $('#end_date').val()+" "+$('#end_hour').val()
               })
             }
-
-
-
-
           }else {
             alert(data.msg)
           }
         },
-        error: function(){
-          alert("error en la comunicación con el servidor");
+        error: function(e){
+          alert("error en la comunicación con el servidor EN EVENTOSdd",e);
         }
       })
 
@@ -195,7 +191,7 @@ class EventsManager {
             }
           },
           error: function(){
-            alert("error en la comunicación con el servidor");
+            alert("error en la comunicación con el servidor AL ACTUALIZAR");
           }
         })
     }

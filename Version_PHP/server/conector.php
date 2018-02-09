@@ -54,6 +54,7 @@ class ConectorBD{
         $sql .= ');';
       $i++;
     }
+   
     return $this -> ejecutarQuery($sql);
   }
 

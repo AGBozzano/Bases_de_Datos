@@ -35,7 +35,7 @@ class Login {
         }
       },
       error: function(){
-        alert("error en la comunicación con el servidor OTRA VEZ");
+        alert("error en la comunicación con el servidor");
       }
     })
   }
