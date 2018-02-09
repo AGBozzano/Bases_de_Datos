@@ -3,7 +3,7 @@ class ConectorBD{
   private $host;
   private $user;
   private $password;
- 
+  private $nombre_db;
   private $conexion;
 
   function __construct($host, $user, $password) {
@@ -107,6 +107,36 @@ class ConectorBD{
     }
     return $this -> ejecutarQuery($sql);
   }
+
+
+  function consultarDatos($tablas, $campos, $condicion = ""){
+      $sqlConsulta = 'SELECT ';
+
+      foreach ($campos as $indice => $value) {
+        $sqlConsulta .= $value;
+        if ($indice < count($campos)-1) {
+          $sqlConsulta .= ', ';
+        }else{
+         $sqlConsulta .=" FROM ";
+        }
+      }
+
+      foreach ($tablas as $indice => $value){
+        $sqlConsulta .= $value;
+        if ($indice < count($tablas)-1) {
+          $sqlConsulta .= ', ';
+        }else{
+          $sqlConsulta .= " ";
+        }
+      }
+
+      if ($condicion == ""){
+        $sqlConsulta .= ";";
+      }else{
+        $sqlConsulta .= $condicion.";";
+      }
+      return $this->conexion->query($sqlConsulta);
+    }
 
 }
 ?>

@@ -8,9 +8,9 @@ class EventsManager {
 
 
     obtenerDataInicial() {
-        let url = '../server/getEvents.php'
+       
         $.ajax({
-          url: url,
+          url: '../server/getEvents.php',
           dataType: "json",
           cache: false,
           processData: false,
@@ -18,14 +18,20 @@ class EventsManager {
           type: 'GET',
           success: (data) =>{
             if (data.msg=="OK") {
+              console.log(data.eventos);
+              console.log(data);
               this.poblarCalendario(data.eventos)
             }else {
               alert(data.msg)
               window.location.href = 'index.html';
             }
           },
-          error: function(){
-            alert("error en la comunicación con el servidor");
+          error: function(data){
+            alert('Error JS-004 en la comunicación con el servidor');
+            console.log(arguments);
+            console.log(data);
+            console.log(data.evento);
+
           }
         })
 
@@ -38,7 +44,7 @@ class EventsManager {
         		center: 'title',
         		right: 'month,agendaWeek,basicDay'
         	},
-        	defaultDate: '2016-11-01',
+        	defaultDate: '2018-01-01',
         	navLinks: true,
         	editable: true,
         	eventLimit: true,

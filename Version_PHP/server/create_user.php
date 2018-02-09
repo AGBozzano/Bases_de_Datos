@@ -5,6 +5,9 @@ require ('conector.php');
 $con = new ConectorBD('localhost', 'nextu', '12345');
 if ($con -> initConexion('calendario_db') == 'OK') {
 	for ($i = 1; $i <= 3; $i++) {
+
+		//Creo 3 Usuario a la vez ... USUARIO 1 - USUARIO 2 - USUARIO 3
+		//Todos con contraseñas encriptadas y distintas 
 		$datos['nombre'] = "Usuario " . $i;
 		$datos['email'] = "usuario" . $i . "@gmail.com";
 		$datos['clave'] = password_hash("usuario" . $i, PASSWORD_DEFAULT);
