@@ -21,12 +21,12 @@ class Login {
     form_data.append('password', $('#password').val())
     $.ajax({
       url: '../server/check_login.php',
-      dataType: "json",
+      dataType:"json",
       cache: false,
       processData: false,
       contentType: false,
       data: form_data,
-      type: 'POST',
+      type:'POST',
       success: function(php_response){
         if (php_response.msg == "OK") {
           window.location.href = 'main.html';
