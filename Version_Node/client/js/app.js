@@ -10,7 +10,11 @@ class EventManager {
     obtenerDataInicial() {
         let url = this.urlBase + "/all"
         $.get(url, (response) => {
+          if(response == "logout" ){
+            this.sessionError()
+          }else{
             this.inicializarCalendario(response)
+          }
         })
     }
 
@@ -120,3 +124,4 @@ class EventManager {
     }
 
     const Manager = new EventManager()
+
