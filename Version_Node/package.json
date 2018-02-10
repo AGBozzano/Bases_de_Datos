@@ -1,0 +1,19 @@
+{
+  "name": "agenda_version_node",
+  "version": "1.0.0",
+  "description": "Evaluacion Final - Agenda Version Node Js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Alejandro Bozzano",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "express-session": "^1.15.6",
+    "mongo": "^0.1.0",
+    "mongodb": "^3.0.2",
+    "mongoose": "^5.0.4"
+  }
+}

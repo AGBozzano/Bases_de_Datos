@@ -1,0 +1,13 @@
+Para el acceso a la Web:
+
+Hay 3 cuentas creadas por medio del archivo "create_user"
+
+     Usuario       ||  Password
+
+Usuario1@gmail.com ||  usuario1 
+Usuario2@gmail.com ||  usuario2 
+Usuario3@gmail.com ||  usuario3   
+
+Para la base de datos... El usuario es: root - sin contraseña... 
+
+Nombre de la base de datos: calendario_db

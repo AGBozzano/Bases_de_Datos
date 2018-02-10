@@ -28,10 +28,6 @@ class EventsManager {
           },
           error: function(data){
             alert('Error JS-004 en la comunicación con el servidor');
-            console.log(arguments);
-            console.log(data);
-            console.log(data.evento);
-
           }
         })
 
