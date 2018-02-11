@@ -7,10 +7,7 @@ class EventManager {
         this.inicializarFormulario()
         this.guardarEvento()
     }
-    sessionError(){
-      alert('Usuario no ha iniciado sesión') //Enviar mensaje
-      window.location.href = 'http://localhost:8082/index.html' //Redireccionar si no existe sesión iniciada
-    }
+
 
     obtenerDataInicial() {
         let url = this.urlBase + "/all"
@@ -54,8 +51,9 @@ class EventManager {
                     start: start,
                     end: end
                 }
+                
                 $.post(url, ev, (response) => {
-                    alert(response)
+                    alert(response);
                 })
                 $('.calendario').fullCalendar('renderEvent', ev)
             } else {
@@ -182,14 +180,14 @@ function validarUser(){
     var pass = $('#pass');
     $('.loginButton').on('click', function(event) {
 
-        console.log("se oprimio correctamente el boton")
+
         if (email.val() != "" && pass.val() != "") {
-                console.log("se oprimio correctamente el boton2")
+                
             $.post('/users/login',{user: email.val(), pass: pass.val()}, function(response) {
 
                 if (response == "Validado") {
                     window.location.href = "http://localhost:8082/main.html";
-                    mostrarMensaje(res);
+                    console.log();
                 }
             })
         } else {

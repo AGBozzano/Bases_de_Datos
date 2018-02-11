@@ -14,6 +14,7 @@
     "express-session": "^1.15.6",
     "mongo": "^0.1.0",
     "mongodb": "^3.0.2",
-    "mongoose": "^5.0.4"
+    "mongoose": "^5.0.4",
+    "mongoose-auto-increment": "^5.0.1"
   }
 }

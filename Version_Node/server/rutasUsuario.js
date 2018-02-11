@@ -53,6 +53,7 @@ Router.post('/login', function(req, res) {
                 }else{
                   if(count == 1){ 
                     isess.user = req.body.user;
+
                     res.send("Validado");
                   }else{ 
                     res.send("Contraseña incorrecta"); 
