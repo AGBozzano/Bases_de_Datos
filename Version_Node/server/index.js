@@ -8,12 +8,12 @@ const http = require('http'),
 	  RutaEvento = require('./rutasEvento.js');
 
 
-//mongoose.connect('mongodb://localhost/agenda');
-connection = mongoose.connect('mongodb://localhost/agenda', function(error){//definir y establecer la base de datos a utilizar
-	if(error){ //Verificar si existe error al conectarse a mongodb
-		 console.log(error.name +" "+ error.message); //Mostrar mensaje de eror
+
+connection = mongoose.connect('mongodb://localhost/agenda', function(error){
+	if(error){ 
+		 console.log(error.name +" "+ error.message); 
 	}else{
-	  console.log('Conectado a MongoDB'); //Mostrar mensaje exitoso
+	  console.log('Conectado a MongoDB'); 
 	}
 });
 

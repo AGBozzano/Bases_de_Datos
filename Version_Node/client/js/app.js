@@ -127,25 +127,25 @@ class EventManager {
 
     actualizarEvento(evento) {
 
-      if(evento.end === null){ //Verificar si el evento es de dia completo
-        var start = moment(evento.start).format('YYYY-MM-DD'), //Enviar la información del día en formato año-mes-dia
-            url = '/events/update/'+evento._id+'&'+start+'&'+start //enviar como parámetros el identificador del evento + lafecha de inicio + la fecha de inicio ya que no se pueden enviar parámetros vacíos
+      if(evento.end === null){ 
+        var start = moment(evento.start).format('YYYY-MM-DD'),
+            url = '/events/update/'+evento._id+'&'+start+'&'+start 
       }else{
-        var start = moment(evento.start).format('YYYY-MM-DD HH:mm:ss'), //Enviar la información del día en formato año-mes-dia Hora-minuto-segundos
-            end = moment(evento.end).format('YYYY-MM-DD HH:mm:ss'), //Enviar la información del día en formato año-mes-dia Hora-minuto-segundos
-            url = '/events/update/'+evento._id+'&'+start+'&'+end //enviar como parámetros el identificador del evento + lafecha de inicio + la fecha de finalización del evento
+        var start = moment(evento.start).format('YYYY-MM-DD HH:mm:ss'), 
+            end = moment(evento.end).format('YYYY-MM-DD HH:mm:ss'), 
+            url = '/events/update/'+evento._id+'&'+start+'&'+end 
       }
 
-        var  data = { //Crear objero data
-              id: evento._id, //asignar e idenificador del evento obtenido
-              start: start, //obtener la fecha inicial
-              end: end //obtener la fecha final
+        var  data = { 
+              id: evento._id, 
+              start: start, 
+              end: end 
         }
-        $.post(url, data, (response) => { //Enviar la consulta AJAX
-            if(response == "logout" ){//Verificar que la respuesta no sea logout (Usuario no ha iniciado sesion)
-                this.sessionError() //Ejecutar función de error de sesión
+        $.post(url, data, (response) => { 
+            if(response == "logout" ){
+                this.sessionError() 
             }else{
-                alert(response) //Mostrar mensaje recibido
+                alert(response) 
             }
         })
     }

@@ -52,10 +52,10 @@ Router.post('/new', function(req, res) {
           end: end,
           user: userId
         })
-        evento.save(function(error) { //Guardar el registro en la base de datos
+        evento.save(function(error) {
           if (error) {
-            console.log(error) //Mostrar error en cosola
-            res.json(error) //Devolver mensaje de error
+            console.log(error) 
+            res.json(error) 
           }
         })
         res.send("El evento se guardo correctamente");
@@ -64,6 +64,31 @@ Router.post('/new', function(req, res) {
   })
 })
 
+Router.post('/update/:_id&:start&:end', function(req, res) { 
+  req.session.reload(function(err) {
+    if(err){
+      console.log(err) 
+      res.send("logout") 
+    }else{
+      Evento.findOne({_id:req.params._id}).exec((error, result) => { 
+        let id    = req.params._id, 
+        start = req.params.start, 
+        end   = req.params.end;
+        if (error){ 
+          res.send(error) 
+        }else{
+          Evento.update({_id: id}, {start:start, end:end}, (error, result) => {
+            if (error){ 
+              res.send(error);
+            }else{
+              res.send("Evento ha sido actualizado");
+            }
+          })
+        }
+      })
+    }
+  })
+})
 
 
 //Exportar el modulo
