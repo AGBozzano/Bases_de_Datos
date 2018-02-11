@@ -5,34 +5,28 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio de sesión</title>
-    <link rel="stylesheet" href="styles.css"/>
+    <link rel="stylesheet" href="css/styles.css"/>
     <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Kaushan+Script|Neucha" rel="stylesheet">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   </head>
-  <body>
+  <body onpageshow="verificarExistenciaDeUsuarios()">
     <div class="loginContainer">
       <div class="loginTitle">Inicio de Sesión</div>
       <div class="fields-Container">
         <input type="text" id="user" placeholder="Usuario..." />
         <input type="password" id="pass" placeholder="Contraseña..." />
-        <button id="login" class="loginButton">Ingresar</button>
+        <button id="login" class="loginButton" onclick="validarUser()">Ingresar</button>
+      </div>
+      <div>
+        <p id="mensajeUsuarios" class="mensajeInicio"></p>
+        <p id="mensajeSesion" class="mensajeInicio"></p>
       </div>
     </div>
-    <script src="jquery.js"></script>
-    <script>
-        var nombreUsuario = $('#user')
-        var pass = $('#pass')
-        $('.loginButton').on('click', function(event) {
-            if (nombreUsuario.val() != "" && pass.val() != "") {
-                $.post('/login',{user: nombreUsuario.val(), pass: pass.val()}, function(response) {
-                    if (response == "Validado") {
-                        window.location.href = "http://localhost:3000/main.html"
-                    }
-                })
-            } else {
-                alert("Complete todos los campos")
-            }
-        })
-    </script>
+    <script src="js/jquery.js"></script>
+    <script src="js/app.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
   </body>
 </html>

@@ -195,6 +195,7 @@ input {
 
 .logout-container {
   display: flex;
+  cursor: pointer;
 }
 
 .logout-image {

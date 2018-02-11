@@ -1,10 +1,10 @@
-
 const http = require('http'),
 	  express = require('express'),
-	  Routing=require('./rutas.js'),
 	  mongoose = require('mongoose'),
 	  bodyParser = require('body-parser'),
-	  session = require('express-session');
+	  session = require('express-session'),
+	  RutaUsuario = require('./rutasUsuario.js'),
+	  RutaEvento = require('./rutasEvento.js');
 
 const PORT = 8082;
 const app = express();
@@ -24,7 +24,8 @@ app.use(session({
     saveUninitialized: true,
 }));
 
-app.use('/users',Routing);
+app.use('/users',RutaUsuario);
+app.use('/events',RutaEvento);
 
 Server.listen(PORT, function(){
 	console.log('Server is listening on port '+ PORT);

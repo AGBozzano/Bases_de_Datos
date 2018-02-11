@@ -5,12 +5,12 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agenda de usuario</title>
-    <link rel="stylesheet" href="fullcalendar.min.css">
-    <link rel="stylesheet" href="index.css"/>
+    <link rel="stylesheet" href="css/fullcalendar.min.css">
+    <link rel="stylesheet" href="css/index.css"/>
     <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Kaushan+Script|Neucha" rel="stylesheet">
-    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
-    <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="css/jquery.timepicker.min.css">
+    <link rel="stylesheet" href="css/jquery-ui.css">
   </head>
   <body>
     <div class="headerCalendar">Mi Agenda Personal</div>
@@ -45,15 +45,21 @@
         </div>
         <div class="logout-container">
           <img class="logout-image" src="logout.png"/>
-          <div class="logoutText" id="logout">Cerrar Sesión</div>
+          <div class="logoutText" id="logout" onclick="cerrarSesion()">Cerrar Sesión</div>
         </div>
       </div>
     </div>
-    <script src="jquery.js"></script>
-    <script src="http://momentjs.com/downloads/moment.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
-    <script src="fullcalendar.min.js"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
-    <script src="bundle.js"></script>
+
+
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="js/moment.min.js"></script>
+    <script type="text/javascript" src="js/fullcalendar.min.js"></script>
+    <script type="text/javascript" src="js/jquery.timepicker.min.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
+
+    <script type="text/javascript">
+      $('.loader-container').fadeOut('slow')
+    </script>
   </body>
 </html>

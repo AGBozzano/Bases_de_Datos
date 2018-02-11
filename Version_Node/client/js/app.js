@@ -1,10 +1,15 @@
 
 class EventManager {
+    
     constructor() {
         this.urlBase = "/events"
         this.obtenerDataInicial()
         this.inicializarFormulario()
         this.guardarEvento()
+    }
+    sessionError(){
+      alert('Usuario no ha iniciado sesión') //Enviar mensaje
+      window.location.href = 'http://localhost:8082/index.html' //Redireccionar si no existe sesión iniciada
     }
 
     obtenerDataInicial() {
@@ -91,7 +96,7 @@ class EventManager {
                 center: 'title',
                 right: 'month,agendaWeek,basicDay'
             },
-            defaultDate: '2016-11-01',
+            defaultDate: '2018-02-01',
             navLinks: true,
             editable: true,
             eventLimit: true,
@@ -120,8 +125,88 @@ class EventManager {
                     }
                 }
             })
-        }
     }
 
-    const Manager = new EventManager()
+    actualizarEvento(evento) {
 
+      if(evento.end === null){ //Verificar si el evento es de dia completo
+        var start = moment(evento.start).format('YYYY-MM-DD'), //Enviar la información del día en formato año-mes-dia
+            url = '/events/update/'+evento._id+'&'+start+'&'+start //enviar como parámetros el identificador del evento + lafecha de inicio + la fecha de inicio ya que no se pueden enviar parámetros vacíos
+      }else{
+        var start = moment(evento.start).format('YYYY-MM-DD HH:mm:ss'), //Enviar la información del día en formato año-mes-dia Hora-minuto-segundos
+            end = moment(evento.end).format('YYYY-MM-DD HH:mm:ss'), //Enviar la información del día en formato año-mes-dia Hora-minuto-segundos
+            url = '/events/update/'+evento._id+'&'+start+'&'+end //enviar como parámetros el identificador del evento + lafecha de inicio + la fecha de finalización del evento
+      }
+
+        var  data = { //Crear objero data
+              id: evento._id, //asignar e idenificador del evento obtenido
+              start: start, //obtener la fecha inicial
+              end: end //obtener la fecha final
+        }
+        $.post(url, data, (response) => { //Enviar la consulta AJAX
+            if(response == "logout" ){//Verificar que la respuesta no sea logout (Usuario no ha iniciado sesion)
+                this.sessionError() //Ejecutar función de error de sesión
+            }else{
+                alert(response) //Mostrar mensaje recibido
+            }
+        })
+    }
+}
+
+    const Manager = new EventManager();
+
+
+   
+
+function verificarExistenciaDeUsuarios(){
+    $.ajax({
+        url: '/users/verificar_user',
+        method: 'GET',
+        data: {},
+        success: function(res) {
+            mensaje = "";
+            for (var i=0; i<res.length; i++) {
+                mensaje += '<small>Usuario: '+res[i].email+' - Clave: '+res[i].password+'</small><br>'; 
+            }
+            $('#mensajeUsuarios').html(mensaje);
+        }
+    })
+}
+function mostrarMensaje(msj){
+    $('#mensajeSesion').html(msj);
+}
+
+function validarUser(){
+    
+    var email = $('#user');
+    var pass = $('#pass');
+    $('.loginButton').on('click', function(event) {
+
+        console.log("se oprimio correctamente el boton")
+        if (email.val() != "" && pass.val() != "") {
+                console.log("se oprimio correctamente el boton2")
+            $.post('/users/login',{user: email.val(), pass: pass.val()}, function(response) {
+
+                if (response == "Validado") {
+                    window.location.href = "http://localhost:8082/main.html";
+                    mostrarMensaje(res);
+                }
+            })
+        } else {
+            alert("Complete todos los campos");
+        }
+    })
+}
+
+function cerrarSesion(){
+  console.log("llegue a este punto")
+  var url = "/users/logout", //url a consultar
+      data = ""; //Enviar variable data sin información
+  $.post(url, data, (response) => {
+    if(response == "logout"){
+      window.location.href="http://localhost:8082/index.html" //url a redireccionar
+    }else{
+      alert("Error inesperado al cerrar sesión") //Mensaje de error
+    }
+  })
+}
