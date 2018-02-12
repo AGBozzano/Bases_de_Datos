@@ -16,14 +16,21 @@ class EventManager {
             this.sessionError()
           }else{
             this.inicializarCalendario(response)
+         
           }
         })
     }
 
     eliminarEvento(evento) {
-        let eventId = evento.id
+        let eventId = evento._id;
         $.post('/events/delete/'+eventId, {id: eventId}, (response) => {
-            alert(response)
+              if(response == "logout" ){
+                this.sessionError()
+              }else{
+            
+                $('.calendario').fullCalendar('removeEvents', eventId);    
+                alert(response);
+              }
         })
     }
 
@@ -53,9 +60,22 @@ class EventManager {
                 }
                 
                 $.post(url, ev, (response) => {
-                    alert(response);
+                    if(response!="logout"){
+                        var newEvent = {
+                            _id:response,
+                            title: title,
+                            start: start,
+                            end: end
+                        }
+                        console.log(response);
+                      
+                        $('.calendario').fullCalendar('renderEvent', newEvent)
+                        alert("Evento guardado.")
+                        
+                      
+                    }
                 })
-                $('.calendario').fullCalendar('renderEvent', ev)
+                
             } else {
                 alert("Complete los campos obligatorios para el evento")
             }
@@ -119,7 +139,7 @@ class EventManager {
                 if (jsEvent.pageX >= x1 && jsEvent.pageX<= x2 &&
                     jsEvent.pageY >= y1 && jsEvent.pageY <= y2) {
                         this.eliminarEvento(event)
-                        $('.calendario').fullCalendar('removeEvents', event.id);
+                        
                     }
                 }
             })
@@ -145,6 +165,7 @@ class EventManager {
             if(response == "logout" ){
                 this.sessionError() 
             }else{
+                console.log(response)
                 alert(response) 
             }
         })
@@ -154,7 +175,9 @@ class EventManager {
     const Manager = new EventManager();
 
 
-   
+$(document).ready(function(){
+    verificarExistenciaDeUsuarios();
+})
 
 function verificarExistenciaDeUsuarios(){
     $.ajax({
@@ -169,9 +192,6 @@ function verificarExistenciaDeUsuarios(){
             $('#mensajeUsuarios').html(mensaje);
         }
     })
-}
-function mostrarMensaje(msj){
-    $('#mensajeSesion').html(msj);
 }
 
 function validarUser(){

@@ -1,0 +1,18 @@
+1. Iniciar "mongod" en consola
+2. Ubicarse en la carpeta Version_Node/server
+3. Colocar el comando "node index.js" para iniciar el proceso
+4. La web se encuentra en el Puerto 8082
+5. En el navegador colocar la siguiente ruta:"http://localhost:8082"
+   La que lo llevara a paginad de inicio index.html
+6. Una vez cargada la pagina apareceran las cuentas cargadas en la base de datos
+   Las cuales son:
+	Usuario: ale@gmail.com
+	Pass: ale123
+
+	Usuario: mia@gmail.com
+	Pass: mia123
+   En caso de no verlos, oprimir F5.
+7. Una vez logueado y dentro de la agenda ya se pueden realizar las operaciones
+   de cargar un evento nuevo, modificarlo y eliminarlo.
+
+Saludos

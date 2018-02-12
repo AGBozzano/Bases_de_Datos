@@ -31,7 +31,7 @@ Router.get('/all', function(req, res) {
     }
   })
 })
-
+//Agrego un nuevo evento al usuario que se encuentra conectado
 Router.post('/new', function(req, res) {
   req.session.reload(function(err) { 
     if(err){
@@ -39,7 +39,9 @@ Router.post('/new', function(req, res) {
       res.json("logout"); 
     }else{
       Usuario.findOne({email:req.session.user}).exec({}, function(error, doc){
-
+        Evento.nextCount(function(err, count) { //La función nextCount del modulo autoincrement obtiene el valor del último registro guardado en el modelo Evento
+          newID = count //Asignar el valor del identificador a la variable newID
+        });
 
         let title = req.body.title, 
         start = req.body.start, 
@@ -57,13 +59,15 @@ Router.post('/new', function(req, res) {
             console.log(error) 
             res.json(error) 
           }
+          res.json(newID)
         })
-        res.send("El evento se guardo correctamente");
+        
       })
     }
   })
 })
 
+//Actualizar la modificacion del evento con los parametros nuevos
 Router.post('/update/:_id&:start&:end', function(req, res) { 
   req.session.reload(function(err) {
     if(err){
@@ -71,7 +75,7 @@ Router.post('/update/:_id&:start&:end', function(req, res) {
       res.send("logout") 
     }else{
       Evento.findOne({_id:req.params._id}).exec((error, result) => { 
-        let id    = req.params._id, 
+        let id = req.params._id, 
         start = req.params.start, 
         end   = req.params.end;
         if (error){ 
@@ -90,6 +94,25 @@ Router.post('/update/:_id&:start&:end', function(req, res) {
   })
 })
 
+// Eliminar un evento que coincida con su id
+Router.post('/delete/:_id', function(req, res) {
+  let id = req.params._id;
+  req.session.reload(function(err) {
+    if(err){
+      console.log(err) 
+      res.send("logout") 
+    }else{
+      Evento.remove({_id: id}, function(error) { 
+        if(error){
+          console.log(error); 
+          res.status(500);
+          res.json(error);
+        }
+        res.send("Registro eliminado") ;
+      })
+    }
+  })
+})
 
 //Exportar el modulo
 module.exports = Router;
