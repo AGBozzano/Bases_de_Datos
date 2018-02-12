@@ -2,7 +2,7 @@
 
 require ('conector.php');
 
-$con = new ConectorBD('localhost', 'nextu', '12345');
+$con = new ConectorBD('localhost', 'root', '');
 if ($con -> initConexion('calendario_db') == 'OK') {
 	for ($i = 1; $i <= 3; $i++) {
 

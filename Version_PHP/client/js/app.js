@@ -18,8 +18,7 @@ class EventsManager {
           type: 'GET',
           success: (data) =>{
             if (data.msg=="OK") {
-              console.log(data.eventos);
-              console.log(data);
+
               this.poblarCalendario(data.eventos)
             }else {
               alert(data.msg)
@@ -96,22 +95,26 @@ class EventsManager {
         type: 'POST',
         success: (data) =>{
           if (data.msg=="OK") {
+            let new_id = data.ultimo_id;
+            console.log(new_id);
             alert('Se ha añadido el evento exitosamente')
             if (document.getElementById('allDay').checked) {
               $('.calendario').fullCalendar('renderEvent', {
+                id:new_id,
                 title: $('#titulo').val(),
                 start: $('#start_date').val(),
                 allDay: true
               })
             }else {
               $('.calendario').fullCalendar('renderEvent', {
+                id:new_id,
                 title: $('#titulo').val(),
                 start: $('#start_date').val()+" "+$('#start_hour').val(),
                 allDay: false,
                 end: $('#end_date').val()+" "+$('#end_hour').val()
               })
             }
-            $('form').reset();
+           
           }else {
             alert(data.msg)
           }
@@ -167,6 +170,7 @@ class EventsManager {
         start_hour = start.substr(11,8)
         end_hour = end.substr(11,8)
 
+        console.log(evento.id);
 
         form_data.append('id', id)
         form_data.append('start_date', start_date)

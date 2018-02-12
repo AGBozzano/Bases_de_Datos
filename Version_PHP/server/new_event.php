@@ -20,6 +20,14 @@
 
     	if ($response['conexion'] == 'OK') {
       	if($con -> insertData('eventos', $datos)){
+
+          //Busco del ultimo evento recien creado, el id para poder pasarlo al calendario para que pueda ser altualizado correctamente....
+          $BuscarId = $con -> ejecutarQuery('SELECT MAX(id) AS id FROM eventos;');
+
+          $UltimoEvent = $BuscarId -> fetch_assoc();
+            $response['ultimo_id'] = $UltimoEvent['id'];
+          
+          
           $response['msg'] = "OK";
   	    }else 
   	      $response['msg'] = "Se ha producido un error al guardar el evento";

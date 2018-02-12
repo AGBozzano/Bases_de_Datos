@@ -48,8 +48,14 @@ class EventManager {
                 end = $('#end_date').val()
                 start_hour = $('#start_hour').val()
                 end_hour = $('#end_hour').val()
-                start = start + 'T' + start_hour
-                end = end + 'T' + end_hour
+                if(start_hour != "" && end_hour!= ""){
+                    start = start + 'T' + start_hour
+                    end = end + 'T' + end_hour
+                }else{
+                    end_hour='12:00:00'
+                    end = end + 'T' + end_hour
+                }
+
             }
             let url = this.urlBase + "/new"
             if (title != "" && start != "") {
@@ -57,7 +63,7 @@ class EventManager {
                     title: title,
                     start: start,
                     end: end
-                }
+                };
                 
                 $.post(url, ev, (response) => {
                     if(response!="logout"){
@@ -126,7 +132,7 @@ class EventManager {
             },
             events: eventos,
             eventDragStart: (event,jsEvent) => {
-                $('.delete').find('img').attr('src', "img/trash-open.png");
+                $('.delete').find('img').attr('src', "../img/trash-open.png");
                 $('.delete').css('background-color', '#a70f19')
             },
             eventDragStop: (event,jsEvent) => {

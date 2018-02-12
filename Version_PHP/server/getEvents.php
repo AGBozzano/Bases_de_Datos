@@ -30,6 +30,8 @@ if($_SESSION['isLogin']){
 			}
 			$response['eventos'] = $eventos;
 			$response['msg'] = 'OK';	
+		}else{
+			$response['msg'] = 'OK';
 		}	
 	}else
 		$response['msg'] = 'Problemas con la conexión a la base de datos';
